@@ -4,11 +4,11 @@ class Contenedor {
     constructor() {
 
     }
-    save(obj) {
+    async save(obj) {
         arr.push(obj)
         console.log(arr)
         for (let i = 0; i <= arr.length; i++) {
-            fs.appendFile("productos.txt", arr[i].qew, (err) => { //Problema al recibir un objeto.
+            await fs.appendFile("productos.txt", arr[i].testprop, (err) => { //Problema al recibir un objeto.
                 if (err) {
                     console.log("err")
                 }
@@ -18,9 +18,9 @@ class Contenedor {
     getById(num) {
 
     }
-    getAll() {
+    async getAll() {
         let array = [];
-        fs.readFile("productos.txt", "utf-8", (err, data) => {
+        await fs.readFile("productos.txt", "utf-8", (err, data) => {
             if (err) {
                 console.log("err")
             } else {
@@ -37,6 +37,9 @@ class Contenedor {
     }
 }
 
-let hola = new Contenedor();
-hola.save({ qew: "sau" });
-hola.getAll()
+let contenedor = new Contenedor();
+contenedor.save({ testprop: "text" });
+contenedor.getById();
+contenedor.getAll();
+contenedor.deleteById();
+contenedor.deleteAll();
