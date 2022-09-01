@@ -9,9 +9,7 @@ app.get("/productos", (req, res) => {
 });
 
 app.get("/productoRandom", (req, res) => {
-  let numero = Math.floor(Math.random() * productos.length);
-  console.log(numero);
-  res.send(productos[numero]);
+  res.send(productos[Math.floor(Math.random() * productos.length)]);
 });
 
 const server = app.listen(8080, () => {
