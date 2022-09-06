@@ -11,6 +11,7 @@ class Contenedor {
     } else {
       idCounter = 1;
     }
+    obj = JSON.parse(obj);
     obj.id = idCounter;
     productos = JSON.parse(
       fs.readFileSync("./modules/productos.json", "utf-8")
