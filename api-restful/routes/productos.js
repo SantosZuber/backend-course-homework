@@ -9,6 +9,9 @@ router.get("/api/productos", (req, res) => {
 
 router.post("/api/productos", (req, res) => {
   contenedor.save(req.body);
+  //No funciona, siempre da undefined
+  console.log(req.body.get_prod_id);
+  // res.redirect(`/api/productos/${req.body.get_prod_id}`);
 });
 
 module.exports = router;
