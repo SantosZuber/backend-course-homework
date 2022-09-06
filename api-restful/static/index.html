@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Inicio</h1>
+
+    <form action="/api/productos" method="GET">
+      <input type="submit" name="prod_btn" value="Ver todos los productos" />
+      <label>GET</label>
+    </form>
+
+    <form action="/form" method="GET">
+      <label>Obtener un producto por id</label>
+      <input type="number" name="get_prod_id" />
+      <label>GET</label>
+    </form>
+
+    <form action="/form" method="POST">
+      <label
+        >Postear un producto. Utilizar el formato: {"propiedad": valor}</label
+      >
+      <input type="text" name="post_prod" />
+      <label>POST</label>
+    </form>
+
+    <form action="/form" method="PUT">
+      <label>Actualizar un producto por id</label>
+      <input type="text" name="put_prod_id" />
+      <label>PUT</label>
+    </form>
+
+    <form action="/form" method="DELETE">
+      <label>Eliminar un producto por id</label>
+      <input type="text" name="delete_prod_id" />
+      <label>DELETE</label>
+    </form>
+  </body>
+</html>
