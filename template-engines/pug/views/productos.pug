@@ -1,0 +1,23 @@
+html
+    head
+        title="Productos"  
+    body
+    style img{width: 40px;} .pepe{color:blue;}
+    h1 hola 
+    a(href="/") 
+        button(id="btn") Inicio
+    table
+        tr(class="pepe")
+            td Title
+            td Price
+            td Image
+            td Id
+        each prop in prods
+            tr
+                td=prop.title
+                td=prop.price
+                td
+                    img(src=prop.thumbnail)
+                td=prop.id
+                
+html 
