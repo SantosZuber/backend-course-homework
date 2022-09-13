@@ -1,0 +1,1 @@
+Creo que el que mejor se adapto a mi proyecto fue pug. Debido a su simplicidad y facilidad de uso. Ejs tambien me parecio bueno y handlebars personalmente se me hizo dificil ya que me resulto distinto a los demas.
