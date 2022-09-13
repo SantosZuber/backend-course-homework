@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Productos</title>
+  </head>
+  <body>
+    <style>
+      img {
+        width: 40px;
+      }
+      .pepe {
+        color: blue;
+      }
+    </style>
+<h1>Productos</h1>
+<a href="/"><button id="btn">Inicio</button></a>
+    <table>
+      <tr class="pepe">
+        <td>Title</td>
+        <td>Price</td>
+        <td>Image</td>
+        <td>Id</td>
+      </tr>
+
+      <% for (let i = 0; i < prods.length ; i++) { %>
+        <tr>
+            <td><%= prods[i].title %></td>
+            <td><%= prods[i].price %></td>
+            <td>
+                <img src=<%= prods[i].thumbnail %> >
+            </td>
+            <td><%= prods[i].id %></td>
+        </tr>
+    <% } %>
+    </table>
+  </body>
+</html>
