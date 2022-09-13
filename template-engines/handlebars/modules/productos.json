@@ -1,1 +1,20 @@
-[{"title":"Microondas","price":"123.45","thumbnail":"https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png","id":1},{"title":"Heladera","price":"122.40","thumbnail":"https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png","id":2},{"title":"Silla","price":"120","thumbnail":"https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png","id":3},{"title":"prueba","id":4}]
+[
+  {
+    "title": "Microondas",
+    "price": "123.45",
+    "thumbnail": "https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png",
+    "id": 1
+  },
+  {
+    "title": "Heladera",
+    "price": "122.40",
+    "thumbnail": "https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png",
+    "id": 2
+  },
+  {
+    "title": "Silla",
+    "price": "120",
+    "thumbnail": "https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-256.png",
+    "id": 3
+  }
+]

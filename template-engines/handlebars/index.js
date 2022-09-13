@@ -8,25 +8,26 @@ app.engine(
   handlebars.engine({
     extname: "hbs",
     layoutsDir: __dirname + "/views/layouts",
-    defaultLayout: "index",
+    defaultLayout: "main",
   })
 );
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.set("views", "./views");
 app.set("view engine", "hbs");
+app.set("views", "views");
 
 app.get("/", (req, res) => {
-  res.render("main", {
-    layouts: "index",
-  });
+  res.render("index");
 });
 
 app.get("/productos", (req, res) => {
-  res.render("main", {
-    layouts: "productos",
-  });
+  let prods = contenedor.getAll();
+  if (prods.length >= 1) {
+    res.render("productos", { prods });
+  } else {
+    res.send("No hay productos");
+  }
 });
 
 app.post("/productos", (req, res) => {
@@ -34,4 +35,4 @@ app.post("/productos", (req, res) => {
   res.redirect("/");
 });
 
-app.listen(8080);
+app.listen(8090);

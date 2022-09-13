@@ -13,7 +13,11 @@ app.get("/", (req, res) => {
 
 app.get("/productos", (req, res) => {
   let prods = contenedor.getAll();
-  res.render("productos.pug", { prods });
+  if (prods.length >= 1) {
+    res.render("productos.pug", { prods });
+  } else {
+    res.send("No hay productos");
+  }
 });
 
 app.post("/productos", (req, res) => {
