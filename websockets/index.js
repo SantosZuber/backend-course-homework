@@ -46,7 +46,7 @@ function validateMsg(data) {
 
 function saveMessage(data) {
   mensajes = JSON.parse(fs.readFileSync("./mensajes.json", "utf-8"));
-  mensajes.push(data)
+  mensajes.push(data);
   fs.writeFileSync("./mensajes.json", JSON.stringify(mensajes));
 }
 
@@ -58,7 +58,7 @@ io.on("connection", (socket) => {
     validateUsername(username);
     validateMsg(message.text);
     message.username = username;
-    saveMessage(message)
+    saveMessage(message);
     io.sockets.emit("newmsg", mensajes);
   });
 });
