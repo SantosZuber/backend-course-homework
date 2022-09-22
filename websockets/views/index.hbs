@@ -1,7 +1,143 @@
-<form action="/productos" method="POST">
-  <label for="postprod">Utilice el formato: {"title": "titulo", "price": "100",
-    "thumbnail": "img link"}
-  </label>
-  <input type="text" name="postprod" />
+<div class="container">
+  <h3>Ingrese Producto</h3>
+<form action="productos" method="POST" class="form-search">
+  <label>Nombre</label>
+  <input type="text" name="post_name"/>
+  <label>Precio</label>
+  <input type="text" name="post_price" />
+  <label>Foto URL</label>
+  <input type="text" name="post_image" />
+  <button id="post_submit_btn">Enviar</button>
 </form>
-<a href="/productos"><button class="btn">Productos</button></a>
+<hr>
+<div class="products-div"><table id="products-container"></table></div>
+</div>
+
+<div class="container">
+<h3>Centro de Mensajes</h3>
+<form id="login-form">
+  <input type="email" name="username" id="username" placeholder="Introduzca su email">
+</form>
+<hr>
+<div id="chat-container"></div>
+
+
+
+<div class="send-msg-container">
+  <input type="text" id="message" placeholder="Ingresa un mensaje...">
+  <button id="send-message-button">Enviar!</button>
+</div>
+
+
+
+
+</div>
+
+<script>
+  const socket = io.connect()
+  let container = document.getElementById("products-container");
+  let chat = document.getElementById("chat-container");
+  let username = undefined;
+
+  document.getElementById("login-form").onsubmit = function(e){
+    e.preventDefault();
+  if (!document.getElementById("username").value == "") {
+    username = document.getElementById("username").value;
+    validateUsername(username);
+  }
+  }
+document.getElementById("send-message-button").onclick = function (e) {
+  e.preventDefault();
+  if (document.getElementById("message").value != "" && username !== undefined) {
+    let date = new Date();
+    let day = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`
+    let time = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+    let message = {};
+    validateMsg(document.getElementById("message").value);
+    message.text = document.getElementById("message").value;
+    message.date = {}
+    message.date.day = day;
+    message.date.time = time;
+    socket.emit("message", username, message);
+    document.getElementById("message").value = "";
+    message = "";
+  } else{
+    alert("Es obligatorio colocar tu email")
+  }
+};
+  socket.on("ping", (prods, mensajes) => {
+    updateProducts(prods);
+    chat.innerHTML = "";
+    mensajes.forEach((e) => {
+    const { username, text, date } = e;
+    const messageElement = document.createElement("div");
+    messageElement.classList.add("message");
+    messageElement.innerHTML = `<p class="username">${username}</p>[<p class="date">${date.day}  ${date.time}</p>] <p class="msg-text">${text}</p><span></span>`;
+    chat.appendChild(messageElement);
+    return;
+  });
+  chat.scrollBy(0, chat.scrollHeight);
+  })
+  socket.on("newprod", (data)=>{
+    updateProducts(data);
+  })
+
+socket.on("newmsg", (data) => {
+  chat.innerHTML = "";
+  data.forEach((e) => {
+        const { username, text, date } = e;
+    const messageElement = document.createElement("div");
+    messageElement.classList.add("message");
+    messageElement.innerHTML = `<p class="username">${username}</p>[<p class="date">${date.day}  ${date.time}</p>] <p class="msg-text">${text}</p><span></span>`;
+    chat.appendChild(messageElement);
+    return;
+  });
+  chat.scrollBy(0, chat.scrollHeight);
+});
+
+
+function validateUsername(data) {
+  if (data.includes("<", ">", "*", "/")) {
+    data = "";
+    alert("Characters like < > * / are not allowed");
+    document.location.reload();
+  } else if (data.includes(" ")) {
+    data = "";
+    alert("Spaces are not allowed");
+    document.location.reload();
+  } else if (data === null) {
+    data = "";
+  }
+}
+function validateMsg(data) {
+  if (data.includes("<", ">", "*", "/")) {
+    data = undefined;
+    alert("Characters like < > * / are not allowed");
+    document.location.reload();
+  } 
+}
+  function updateProducts(data){
+    if(data === null){
+      container.innerHTML = `<p>No hay productos</p>`
+    } else{
+      container.innerHTML = `<tr class="titles">
+    <td>Title</td>
+    <td>Price</td>
+    <td>Image</td>
+    <td>Id</td>
+  </tr>`;
+    data.forEach((e) => {
+    const { title, price, thumbnail, id } = e;
+    const productElement = document.createElement("tr");
+    productElement.innerHTML = `      <td>${title}</td>
+      <td>${price}</td>
+      <td>
+        <img src=${thumbnail} />
+      </td>
+      <td>${id}</td>`;
+    container.appendChild(productElement);
+    return;
+  });
+    }
+  }
+</script>
