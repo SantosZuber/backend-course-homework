@@ -1,0 +1,23 @@
+<style>
+  img { width: 40px; } .pepe { color: blue; }
+</style>
+<h1>Productos</h1>
+<a href="/"><button id="btn">Inicio</button></a>
+<table>
+  <tr class="pepe">
+    <td>Title</td>
+    <td>Price</td>
+    <td>Image</td>
+    <td>Id</td>
+  </tr>
+  {{#each prods}}
+    <tr>
+      <td>{{this.title}}</td>
+      <td>{{this.price}}</td>
+      <td>
+        <img src={{this.thumbnail}} />
+      </td>
+      <td>{{this.id}}</td>
+    </tr>
+  {{/each}}
+</table>
